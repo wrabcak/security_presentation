@@ -1,0 +1,13 @@
+---
+- name: Setup virt-server for tang service
+  hosts: server
+  become: yes
+  become_user: root
+  vars:
+    nbde_server_manage_firewall: true
+    nbde_server_manage_selinux: true
+    nbde_server_port: 7500
+    nbde_server_firewall_zone: public
+
+  roles:
+    - linux-system-roles.nbde_server

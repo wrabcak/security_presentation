@@ -1,0 +1,5 @@
+[server]
+tang-server
+
+[client]
+virt-securebox
