@@ -61,6 +61,8 @@ echo ""
 clear
 
 read -p "--> Update aide db for demo purposes"
+read -p "sudo aide --update > /dev/null"
+read -p "sudo mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz"
 
 sudo aide --update > /dev/null
 sudo mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
@@ -72,11 +74,117 @@ echo ""
 sudo sh -c 'echo "* * * * * /usr/local/sbin/badhack" >> /etc/crontab'
 
 read -p "--> Aide example 1. Aide check database"
+read -p "sudo aide --check"
 echo ""
 sudo aide --check
 echo ""
 
 read -p ""
+clear
+
+read -p "USBGuard remove the USB device"
+echo ""
+echo ""
+
+read -p "lsusb"
+echo ""
+lsusb
+echo ""
+
+read -p "lsblk"
+echo ""
+lsblk
+echo ""
+
+read -p "sudo cat /etc/usbguard/usbguard-daemon.conf  | grep Implicit"
+echo ""
+sudo cat /etc/usbguard/usbguard-daemon.conf  | grep Implicit
+echo ""
+
+read -p "usbguard generate-policy > rules.conf"
+echo ""
+sudo usbguard generate-policy > rules.conf
+echo ""
+
+read -p "cat rules.conf"
+echo ""
+cat rules.conf
+echo ""
+
+read -p "install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf"
+echo ""
+sudo install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf
+echo ""
+
+read -p "systemctl restart usbguard"
+echo ""
+sudo systemctl restart usbguard
+echo ""
+
+read -p "insert USB device!"
+echo ""
+echo ""
+
+read -p "lsusb"
+echo ""
+lsusb
+echo ""
+
+read -p "lsblk"
+echo ""
+lsblk
+echo ""
+
+read -p "usbguard generate-policy > rules.conf"
+echo ""
+sudo usbguard generate-policy > rules.conf
+echo ""
+
+read -p "cat rules.conf"
+echo ""
+cat rules.conf
+echo ""
+
+read -p "install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf"
+echo ""
+sudo install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf
+echo ""
+
+read -p "systemctl restart usbguard"
+echo ""
+sudo systemctl restart usbguard
+echo ""
+
+read -p "Reinsert the USB device"
+echo ""
+echo ""
+
+read -p "lsblk"
+echo ""
+lsblk
+echo ""
+
+read -p "cat /etc/usbguard/rules.conf"
+echo ""
+sudo cat /etc/usbguard/rules.conf
+echo ""
+
+read -p "mount /dev/sda1 /mnt/mount"
+echo ""
+sudo mount /dev/sda1 /mnt/mount
+echo ""
+
+read -p "ls /mnt/mount"
+echo ""
+ls /mnt/mount
+echo ""
+
+read -p "umount /mnt/mount"
+echo ""
+sudo umount /mnt/mount
+echo ""
+
+echo ""
 clear
 
 read -p "--> SELinux example 1. Confined users"

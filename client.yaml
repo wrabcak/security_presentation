@@ -56,6 +56,7 @@
       loop:
         - fapolicyd
         - aide
+        - usbguard
         - selinux-policy-devel
 
     - name: Start integrity
@@ -73,6 +74,10 @@
 
     - name: Check if there is existing hackme trusted file in fapolicyd, if yes remove it
       ansible.builtin.shell: rm -rf /etc/fapolicyd/trust.d/hackme
+      ignore_errors: true
+
+    - name: Check if there is existing USBGuard rules file, if yes remove it
+      ansible.builtin.shell: rm -rf /home/lvrabec/rules.conf
       ignore_errors: true
 
     - name: Make the hackme script trusted for for fapolicyd. pssst! ;)
@@ -97,6 +102,14 @@
 
     - name: Make new copy of aide db active
       ansible.builtin.shell: mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+
+    - name: Creates directory /mnt/mount for USBGuard example
+      ansible.builtin.file:
+        path: /mnt/mount
+        state: directory
+        owner: root
+        group: root
+        mode: '0644'
 
   roles:
     - linux-system-roles.nbde_client
